@@ -1,0 +1,10 @@
+# Local-only agent docs (kept private)
+AGENTS.md
+CLAUDE.md
+
+# Private pipeline (never published)
+private/
+
+# Local settings
+.claude/settings.local.json
+.DS_Store
