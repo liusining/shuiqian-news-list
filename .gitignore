@@ -5,6 +5,10 @@ CLAUDE.md
 # Private pipeline (never published)
 private/
 
+# Local tool state
+.wrangler/
+node_modules/
+
 # Local settings
 .claude/settings.local.json
 .DS_Store
