@@ -1,0 +1,7 @@
+{
+  "name": "shuiqian-news-list",
+  "private": true,
+  "devDependencies": {
+    "wrangler": "4.125.0"
+  }
+}
