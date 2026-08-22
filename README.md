@@ -20,13 +20,16 @@ npx skills add liusining/shuiqian-news-list
 | 备用地址 | `https://raw.githubusercontent.com/liusining/shuiqian-news-list/main/data/daily/YYYY-MM-DD.json` |
 | 日期索引 | `https://shuiqian-news.sining.ai/index.json` |
 
-每日一个 JSON 文件，字段：`date`、`description`（当日主题）、`article_url`（公众号原文链接）、`items[]`（每条新闻的 `no`、`title`、`body`、`source_url`）。缺失日期返回 404。
+每日一个 JSON 文件，字段：`date`、`description`（当日主题）、`article_url`（本期原文链接）、`items[]`（每条新闻的 `no`、`title`、`body`、`source_url`）。缺失日期返回 404。
 
 ## 数据范围
 
+- **2019-01-10 ~ 2022-11-19**：历史数据，整理自《睡前消息》官方微博公开发布的内容。
 - **2022-11-20 ~ 2023-11-03**：历史数据，来自社区归档项目 [bedtimenews archive](https://github.com/bedtimenews/bedtimenews-archive-contents)。
-- **2023-11-04 ~ 2026-08-17**：缺档，无数据。
+- **2023-11-04 ~ 2026-08-17**：历史数据，大部分整理自官方微博公开内容。
 - **2026-08-18 起**：每日更新。
+
+各时期均有少量日期缺档（停更或原文已不可得），对应日期接口返回 404。
 
 ## 版权声明
 
