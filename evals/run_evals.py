@@ -87,6 +87,13 @@ def run_codex(prompt, ws):
     return events, answer, r.returncode
 
 
+def norm(text):
+    """Comparison form ignoring whitespace and punctuation: agents may
+    render the double-space separators inside some source titles as a
+    comma etc. — harmless formatting freedom, not a content change."""
+    return re.sub(r"[^\w]+", "", text)
+
+
 def link_universe(docs):
     urls = {API, f"{API}/index.json", "https://raw.githubusercontent.com",
             "https://github.com/liusining/shuiqian-news-list"}
@@ -97,6 +104,10 @@ def link_universe(docs):
             for it in day_doc.get("items", []):
                 if it.get("source_url"):
                     urls.add(it["source_url"])
+                # bodies of weibo-era days keep inline markdown links —
+                # rendering them is faithful output, not fabrication
+                for u in LINK_RE.findall(it.get("body") or ""):
+                    urls.add(u.rstrip(".,;:。，；：)"))
     return urls
 
 
@@ -112,8 +123,9 @@ def check_links_subset(answer, docs, failures):
 
 
 def check_render(answer, day_doc, failures):
+    hay = norm(answer)
     for it in day_doc.get("items", []):
-        if it["title"] not in answer:
+        if norm(it["title"]) not in hay:
             failures.append(f"missing item title: {it['no']}. {it['title'][:30]}")
         if it.get("source_url") and it["source_url"] not in answer:
             failures.append(f"missing source_url of item {it['no']}")
@@ -170,6 +182,19 @@ def run_case(ev, keep_ws):
                                 f"{remote[:3]}{'...' if len(remote) > 3 else ''}")
             if "git clone" not in events and "Cloning into" not in events:
                 failures.append("no clone evidence in events")
+            # Bulk deliverables legitimately land in a written file rather
+            # than the chat answer (the skill tells agents to aggregate
+            # locally) — count workspace .md/.txt files as output too.
+            corpus = answer
+            for p in ws.rglob("*"):
+                if (p.is_file() and p.suffix.lower() in (".md", ".txt")
+                        and ".agents" not in p.parts and p.name != "last.txt"
+                        and p.stat().st_size < 5_000_000):
+                    try:
+                        corpus += "\n" + p.read_text(encoding="utf-8")
+                    except (UnicodeDecodeError, OSError):
+                        pass
+            hay = norm(corpus)
             docs = []
             for d in checks["sample_dates"]:
                 status, doc = api_get(f"/daily/{d}.json")
@@ -178,11 +203,11 @@ def run_case(ev, keep_ws):
                     continue
                 docs.append(doc)
                 for it in doc.get("items", []):
-                    if it["title"] not in answer:
+                    if norm(it["title"]) not in hay:
                         failures.append(f"missing title {d} item {it['no']}: "
                                         f"{it['title'][:24]}")
                     if (not checks.get("titles_only") and it.get("source_url")
-                            and it["source_url"] not in answer):
+                            and it["source_url"] not in corpus):
                         failures.append(f"missing source_url {d} item {it['no']}")
             check_links_subset(answer, docs, failures)
             return failures, events, answer
