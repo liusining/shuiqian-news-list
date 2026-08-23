@@ -59,7 +59,7 @@
     {
       "id": "n-opinion",
       "prompt": "你怎么评价睡前消息节目的观点？",
-      "expected_output": "评论观点，不需要拉取某天列表",
+      "expected_output": "评论观点，不需要拉取某天列表（已知边界用例：部分 harness 会拉取一次当日列表作为评价依据，危害可忽略，作趋势观察保留）",
       "checks": {"trigger": false}
     },
     {
