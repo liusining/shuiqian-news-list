@@ -1,14 +1,14 @@
 # 睡前消息每日新闻列表
 
-《睡前消息》栏目每天晚上发布一期新闻列表。本仓库把它整理成按天存放的 JSON 数据，并提供一个 AI agent skill（适用于 Claude Code 等），随时查询当天或历史某天的新闻列表。
+《睡前消息》栏目每天晚上发布一期新闻列表。本仓库把它整理成按天存放的 JSON 数据，每日更新。
 
-## 安装 skill
+## 使用 skill
+
+配套的 AI agent skill（适用于 Claude Code 等，可随时查询当天或历史某天的新闻列表）在独立仓库 [shuiqian-news-skill](https://github.com/liusining/shuiqian-news-skill)：
 
 ```bash
-npx skills add liusining/shuiqian-news-list
+npx skills add liusining/shuiqian-news-skill
 ```
-
-或克隆本仓库后执行 `npx skills add ./skills --all`。
 
 装好后直接对 agent 说「今天的睡前消息」「2023年3月15日的睡前新闻」即可。
 

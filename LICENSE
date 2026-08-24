@@ -2,14 +2,15 @@ MIT License
 
 Copyright (c) 2026 liusining
 
-本许可证仅覆盖本仓库中的 skill 文本、脚本与配置（skills/、evals/ 等）。
-data/ 目录下的新闻列表内容版权归《睡前消息》编辑部所有，不在本许可证
-授权范围内；详见 README 的版权声明。
+本许可证仅覆盖本仓库中的整理脚本与配置。data/ 目录下的新闻列表内容
+版权归《睡前消息》编辑部所有，不在本许可证授权范围内；详见 README
+的版权声明。配套 skill 与 eval 见独立仓库 shuiqian-news-skill。
 
-This license covers the skill text, scripts, and configuration in this
-repository (skills/, evals/, etc.). The news-list content under data/ is
-copyrighted by its original publisher and is NOT licensed under these
-terms; see the copyright notice in README.
+This license covers the maintenance scripts and configuration in this
+repository. The news-list content under data/ is copyrighted by its
+original publisher and is NOT licensed under these terms; see the
+copyright notice in README. The companion skill and evals live in the
+separate shuiqian-news-skill repository.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
