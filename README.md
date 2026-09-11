@@ -16,9 +16,8 @@ npx skills add liusining/shuiqian-news-skill
 
 | 用途 | 地址 |
 |---|---|
-| 某天的新闻列表 | `https://shuiqian-news.sining.ai/daily/YYYY-MM-DD.json` |
-| 备用地址 | `https://raw.githubusercontent.com/liusining/shuiqian-news-list/main/data/daily/YYYY-MM-DD.json` |
-| 日期索引 | `https://shuiqian-news.sining.ai/index.json` |
+| 某天的新闻列表 | `https://raw.githubusercontent.com/liusining/shuiqian-news-list/main/data/daily/YYYY-MM-DD.json` |
+| 日期索引 | `https://raw.githubusercontent.com/liusining/shuiqian-news-list/main/data/index.json` |
 
 每日一个 JSON 文件，字段：`date`、`description`（当日主题）、`article_url`（本期原文链接）、`items[]`（每条新闻的 `no`、`title`、`body`、`source_url`）。缺失日期返回 404。
 
